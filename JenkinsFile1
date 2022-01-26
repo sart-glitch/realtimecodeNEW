@@ -14,7 +14,7 @@ mypipeline{
         stage('Compile'){
             agent any
             steps{
-                sh 'mvn compile'
+               // sh 'mvn compile'
             }
         }
         stage('CodeReview'){
