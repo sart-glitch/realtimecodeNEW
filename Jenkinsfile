@@ -28,6 +28,12 @@ pipeline{
 		sh "mvn package"
 		}
 		}
+	stage("deploy"){
+	    steps{
+		//sh "mvn package"
+		    echo "mydepploy"
+		}
+		}
 	  }
 	}
 
