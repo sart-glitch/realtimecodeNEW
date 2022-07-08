@@ -45,6 +45,13 @@ pipeline{
                     sh 'mvn package'
                 }
             }
+			
+			stage('deploy'){
+                agent any
+                steps{
+                     echo 'mydeploy'
+                }
+            }
             
         }
     
