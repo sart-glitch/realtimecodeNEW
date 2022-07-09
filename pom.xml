@@ -480,6 +480,7 @@
                                 java.util.* -attributes -operations
                                 -enumerations -enumconstants
                             </additionalparam>
+				<linkXRef>false</linkXRef>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -493,6 +494,7 @@
             <artifactId>maven-jxr-plugin</artifactId>
             <version>2.3</version>
         </plugin>
+
                 </plugins>
             </reporting>
         </profile>
