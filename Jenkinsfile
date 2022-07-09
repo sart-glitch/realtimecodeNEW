@@ -1,55 +1,70 @@
 pipeline{
+     
     tools{
         jdk 'JAVA_HOME'
         maven 'M2_HOME'
-    }
-    agent any
+       }
+      
+     agent any
         stages{
-		stage("checkout"){
-	   steps{
-	   git 'https://github.com/ashisnishanka/realtimecodeNEW.git'
-	   }
-	   }
+            stage('clone repo'){
+           
+            steps{
+                git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
+                }
+				}
              stage('Compile'){
                 agent any
+                  
                 steps{
+                    git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
                     sh 'mvn compile'
                 }
                 
             }
             stage('CodeReview'){
-                agent any
+               
                 steps{
+                    git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
                     sh 'mvn pmd:pmd'
                 }
-                
+                post{
+                    always{
+                        //dependencyCheckPublisher pattern: 'target/pmd.xml'
+                           //pmd pattern: 'target/pmd.xml'
+                          // maven.pmd.rulesetfiles
+                          echo 'postbuild action successfully '
+                   }
+                }
             }
             stage('UnitTest'){
-                agent any
+                agent {label 'mywinjob'}
+                       
                 steps{
                   
-                    sh 'mvn test'
+                   //git 'give git url'
+                   git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
+                    bat 'mvn test'
                 }
                 
             }
             stage('MetriCheck'){
-                agent any
+                
                 steps{
+                    git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
                     sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
                 }
-                
-            }
-            stage('Package'){
-                agent any
-                steps{
-                    sh 'mvn package'
+                post{
+                    always{
+                        cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
+                    }
                 }
             }
-			
-			stage('deploy'){
-                agent any
+            stage('Package'){
+                
                 steps{
-                     echo 'mydeploy'
+                    git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
+                    sh 'mvn package'
                 }
             }
             
