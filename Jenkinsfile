@@ -38,13 +38,13 @@ pipeline{
                 }
             }
             stage('UnitTest'){
-                agent {label 'mywinjob'}
+                //agent {label 'mywinjob'}
                        
                 steps{
                   
                    //git 'give git url'
                    git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
-                    bat 'mvn test'
+                    sh 'mvn test'
                 }
                 
             }
