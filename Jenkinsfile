@@ -81,7 +81,7 @@ pipeline{
                 steps{
                     //git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
                     //sh 'mvn package'
-			echo "dev deploy the application"
+			echo "dev deploy the application1"
                 }
             }
             
