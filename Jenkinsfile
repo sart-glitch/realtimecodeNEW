@@ -67,12 +67,21 @@ pipeline{
                     sh 'mvn package'
                 }
             }
-		stage('deploy'){
+		stage(' QA deploy'){
                 
                 steps{
                     //git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
                     //sh 'mvn package'
-			echo "deploy the application"
+			echo " QA deploy the application"
+                }
+            }
+			
+		stage(' dev deploy'){
+                
+                steps{
+                    //git credentialsId: '26dedd60-8aee-4f52-a544-b68ee82c607f', url: 'https://github.com/ashisnishanka/realtimecodeNEW.git'
+                    //sh 'mvn package'
+			echo "dev deploy the application"
                 }
             }
             
